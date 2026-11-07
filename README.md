@@ -3,7 +3,13 @@
 > **"Can I afford this hire without dying in 6 months?"**  
 > An opinionated, zero-BS financial runway and headcount scenario simulator built for pre-seed and seed-stage founders. Shipped by **Bhushan Bhosale** (Founder's Office & Growth PM).
 
+[![Live on Vercel](https://img.shields.io/badge/Live-runwayradar.vercel.app-10B981?style=for-the-badge&logo=vercel)](https://runwayradar.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-26BB%2FRunwayRadar-6366F1?style=for-the-badge&logo=github)](https://github.com/26BB/RunwayRadar)
+
 ---
+
+## 🚀 Live Production URL
+👉 **[https://runwayradar.vercel.app](https://runwayradar.vercel.app)**
 
 ## 🎯 Executive Overview
 
