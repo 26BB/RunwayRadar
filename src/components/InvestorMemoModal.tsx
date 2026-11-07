@@ -21,7 +21,7 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
   if (!isOpen) return null;
 
   const [activeTab, setActiveTab] = useState<'markdown' | 'whatsapp'>('markdown');
-  const [companyName, setCompanyName] = useState('Acme Technologies');
+  const [companyName, setCompanyName] = useState('Runway Labs');
   const [copied, setCopied] = useState(false);
 
   const markdownMemo = generateMarkdownMemo(state, result, {
@@ -40,9 +40,8 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
     try {
       await navigator.clipboard.writeText(activeContent);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
       const ta = document.createElement('textarea');
       ta.value = activeContent;
       document.body.appendChild(ta);
@@ -50,54 +49,54 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
       document.execCommand('copy');
       document.body.removeChild(ta);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
       <div
-        className="bg-[#12151E] border border-[#242C40] rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="bg-[#0D0F15] border border-white/[0.08] rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E2333]">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
           <div>
-            <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-400" /> Executive & Investor Memo Export
+            <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+              <FileText className="w-4 h-4 text-zinc-400" /> Executive & Investor Memo Export
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              1-click formatted updates ready for WhatsApp, Slack, Notion, or Board Decks
+            <p className="text-[11px] text-zinc-400 mt-0.5">
+              Instant standardized updates for Notion, WhatsApp, Slack, or Board Communications
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-[#1C2234] transition-colors"
+            className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Company Name & Tabs Bar */}
-        <div className="px-6 py-3.5 bg-[#0E111A] border-b border-[#1E2333] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        {/* Company Name & Format Switcher */}
+        <div className="px-5 py-3 bg-zinc-900/40 border-b border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Building className="w-4 h-4 text-slate-400" />
+            <Building className="w-3.5 h-3.5 text-zinc-500" />
             <input
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Company Name"
-              className="px-2.5 py-1 text-xs bg-[#151926] border border-[#242C40] rounded-lg text-white font-semibold focus:outline-none focus:border-indigo-500 w-full sm:w-48"
+              className="px-2.5 py-1 text-xs bg-zinc-900 border border-white/[0.08] rounded-md text-white font-medium focus:outline-none focus:border-white/20 w-full sm:w-48"
             />
           </div>
 
-          <div className="flex items-center gap-1 bg-[#151926] p-1 rounded-xl border border-[#242C40]">
+          <div className="flex items-center gap-1 bg-zinc-900 p-0.5 rounded-lg border border-white/[0.08]">
             <button
               onClick={() => setActiveTab('markdown')}
-              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-all ${
                 activeTab === 'markdown'
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.08]'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -105,10 +104,10 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('whatsapp')}
-              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-all ${
                 activeTab === 'whatsapp'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.08]'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               <MessageSquare className="w-3.5 h-3.5" />
@@ -117,36 +116,36 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
           </div>
         </div>
 
-        {/* Preview content */}
-        <div className="p-6 overflow-y-auto font-mono-num text-xs bg-[#090A0F] text-slate-200 flex-1 leading-relaxed whitespace-pre-wrap select-all selection:bg-indigo-500/30">
+        {/* Formatted Code View */}
+        <div className="p-5 overflow-y-auto font-mono text-xs bg-[#08090C] text-zinc-300 flex-1 leading-relaxed whitespace-pre-wrap select-all">
           {activeContent}
         </div>
 
-        {/* Modal Footer */}
-        <div className="flex items-center justify-between px-6 py-3.5 bg-[#0E111A] border-t border-[#1E2333]">
-          <span className="text-xs text-slate-500">
-            {activeTab === 'markdown' ? 'Compatible with Notion, GitHub & Email' : 'Optimized with WhatsApp bolding (*)'}
+        {/* Footer Actions */}
+        <div className="flex items-center justify-between px-5 py-3.5 bg-zinc-900/60 border-t border-white/[0.06]">
+          <span className="text-[11px] text-zinc-400 font-mono">
+            {activeTab === 'markdown' ? 'Notion & Slack Markdown ready' : 'WhatsApp single-click bolding'}
           </span>
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="px-3.5 py-1.5 text-xs font-medium text-slate-400 hover:text-white"
+              className="px-3 py-1.5 text-xs text-zinc-400 hover:text-white"
             >
-              Close
+              Cancel
             </button>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-all active:scale-[0.98]"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-300" />
-                  <span className="text-emerald-300">Copied to Clipboard!</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-medium">Copied!</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5" />
-                  <span>Copy Text</span>
+                  <span>Copy to Clipboard</span>
                 </>
               )}
             </button>

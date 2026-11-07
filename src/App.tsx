@@ -14,7 +14,7 @@ import { HeadcountSandbox } from './components/HeadcountSandbox';
 import { NuclearWinterToggle } from './components/NuclearWinterToggle';
 import { TrajectoryChart } from './components/TrajectoryChart';
 import { InvestorMemoModal } from './components/InvestorMemoModal';
-import { RotateCcw, Sparkles } from 'lucide-react';
+import { RotateCcw, Check } from 'lucide-react';
 
 export const App: React.FC = () => {
   // Initialize state from URL if present, otherwise default preset
@@ -95,7 +95,7 @@ export const App: React.FC = () => {
     if (preset) {
       setActivePresetId(presetId);
       setFinancialState(preset.state);
-      showToast(`Loaded "${preset.name}" preset`);
+      showToast(`Loaded "${preset.name}" scenario`);
     }
   }, []);
 
@@ -105,7 +105,7 @@ export const App: React.FC = () => {
       ...prev,
       hires: [...prev.hires, hire],
     }));
-    showToast(`Added ${hire.role} to headcount`);
+    showToast(`Added ${hire.role} to roster`);
   }, []);
 
   const handleUpdateHire = useCallback((id: string, patch: Partial<PlannedHire>) => {
@@ -128,12 +128,12 @@ export const App: React.FC = () => {
   const handleNuclearToggle = useCallback((active: boolean) => {
     setActivePresetId(null);
     setFinancialState((prev) => ({ ...prev, isNuclearWinter: active }));
-    showToast(active ? 'Nuclear Winter Mode Enabled ❄️' : 'Standard Market Conditions Restored');
+    showToast(active ? 'Macro Stress-Test Mode Activated' : 'Standard Market Baseline Restored');
   }, []);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
+    setTimeout(() => setToastMessage(null), 2500);
   };
 
   const handleShare = async () => {
@@ -141,10 +141,10 @@ export const App: React.FC = () => {
     try {
       await navigator.clipboard.writeText(url);
       setIsCopied(true);
-      showToast('Scenario link copied to clipboard! 🔗');
+      showToast('Scenario deep-link copied to clipboard');
       setTimeout(() => setIsCopied(false), 2000);
     } catch {
-      showToast('Copy failed. Please copy URL directly.');
+      showToast('Unable to copy automatically');
     }
   };
 
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#090A0F] text-[#F1F5F9] flex flex-col font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-[#08090C] text-[#F8FAFC] flex flex-col font-sans selection:bg-white/[0.1] canvas-ambient-glow">
       {/* Top Navigation */}
       <Header
         currency={financialState.currency}
@@ -165,16 +165,16 @@ export const App: React.FC = () => {
         isCopied={isCopied}
       />
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto w-full px-4 lg:px-8 py-6 space-y-6 flex-1">
-        {/* Executive Vital Signs (Top KPIs) */}
+      {/* Main Cockpit Container */}
+      <main className="max-w-7xl mx-auto w-full px-4 lg:px-8 py-5 space-y-4.5 flex-1">
+        {/* Executive Vital Signs (Top Bento KPIs) */}
         <VitalSigns state={financialState} result={simulationResult} />
 
         {/* Financial Trajectory Curve */}
         <TrajectoryChart result={simulationResult} currency={financialState.currency} />
 
-        {/* 2-Column Grid: Inputs & Headcount Sandbox */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        {/* 2-Column Grid: Core Inputs & Headcount Sandbox */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4.5 items-start">
           <FinancialInputs state={financialState} onChange={handleStateChange} />
           <HeadcountSandbox
             hires={financialState.hires}
@@ -194,10 +194,10 @@ export const App: React.FC = () => {
         />
       </main>
 
-      {/* Toast Notification */}
+      {/* Feedback Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#151926] border border-indigo-500/40 text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
-          <Sparkles className="w-4 h-4 text-indigo-400" />
+        <div className="fixed bottom-5 right-5 z-50 bg-zinc-900/95 border border-white/[0.12] text-zinc-100 px-3.5 py-2 rounded-lg shadow-2xl text-xs font-medium flex items-center gap-2 backdrop-blur-md">
+          <Check className="w-3.5 h-3.5 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -211,25 +211,25 @@ export const App: React.FC = () => {
         shareUrl={typeof window !== 'undefined' ? window.location.href : ''}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-[#1E2333] py-6 px-4 lg:px-8 bg-[#0B0D14] text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span>RunwayRadar</span>
+      {/* Executive Minimalist Footer */}
+      <footer className="border-t border-white/[0.04] py-5 px-4 lg:px-8 bg-[#06070A] text-xs text-zinc-400">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="font-semibold text-zinc-300">RunwayRadar</span>
             <span>·</span>
-            <span>Founder's Office Financial Simulation</span>
+            <span>Founder Runway & Headcount Simulator</span>
             <span>·</span>
             <button
               onClick={handleReset}
-              className="text-slate-400 hover:text-indigo-400 flex items-center gap-1 transition-colors"
+              className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors font-mono"
             >
-              <RotateCcw className="w-3 h-3" /> Reset Default
+              <RotateCcw className="w-3 h-3" /> Reset
             </button>
           </div>
-          <div className="flex items-center gap-3">
-            <span>Deterministic Client-Side Math (No Server Delay)</span>
+          <div className="flex items-center gap-3 text-[11px] font-mono">
+            <span>Deterministic Client-Side Math</span>
             <span>·</span>
-            <span className="text-slate-400">Crafted by Bhushan Bhosale</span>
+            <span className="text-zinc-300">Crafted by Bhushan Bhosale</span>
           </div>
         </div>
       </footer>

@@ -62,49 +62,51 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
   );
 
   return (
-    <div className="bg-[#12151E] border border-[#1E2333] rounded-2xl p-5 shadow-sm">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-[#1E2333] mb-5">
+    <div className="bg-[#0D0F15] border border-white/[0.06] rounded-xl p-5 shadow-sm">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3.5 border-b border-white/[0.06] mb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
-              <Users className="w-4 h-4 text-indigo-400" /> Headcount Sandbox ("What-If" Hiring)
+            <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+              <Users className="w-4 h-4 text-zinc-400" /> Headcount Sandbox ("What-If" Hiring)
             </h2>
-            <span className="text-xs font-mono-num font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+            <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
               {hires.length} {hires.length === 1 ? 'Role' : 'Roles'}
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Model upcoming hiring ramp and inspect runway cliff impact (Runway Drag)
+          <p className="text-[11px] text-zinc-400 mt-0.5">
+            Model planned hiring timeline and calculate runway drag in real-time
           </p>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {runwayDrag > 0 && (
-            <div className="px-2.5 py-1 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-mono-num font-bold">
+            <div className="px-2.5 py-1 rounded-md bg-rose-500/[0.08] border border-rose-500/20 text-rose-400 text-xs font-mono font-bold">
               -{runwayDrag.toFixed(1)} mos Drag
             </div>
           )}
           <button
             onClick={() => setIsFormOpen(!isFormOpen)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-all active:scale-[0.98]"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>Add Role</span>
+            <span>Add Planned Role</span>
           </button>
         </div>
       </div>
 
       {/* New Hire Inline Form */}
       {isFormOpen && (
-        <form onSubmit={handleCreate} className="bg-[#151926] border border-indigo-500/30 rounded-xl p-4 mb-5 shadow-inner animate-in fade-in duration-200">
+        <form onSubmit={handleCreate} className="bg-zinc-900/60 border border-white/[0.1] rounded-xl p-4 mb-4 shadow-inner">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              <Briefcase className="w-3.5 h-3.5 text-indigo-400" /> Add Planned Role
+            <span className="text-xs font-semibold text-white tracking-wide flex items-center gap-1.5 font-mono uppercase">
+              <Briefcase className="w-3.5 h-3.5 text-zinc-400" /> New Role Configuration
             </span>
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="text-xs text-slate-400 hover:text-white"
+              className="text-xs text-zinc-400 hover:text-white"
             >
               Cancel
             </button>
@@ -112,14 +114,14 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-[11px] font-semibold text-slate-300 mb-1">Role Title</label>
+              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Role Title</label>
               <input
                 type="text"
                 required
-                placeholder="e.g. Sr. Fullstack Engineer"
+                placeholder="e.g. Founding AI Engineer"
                 value={roleTitle}
                 onChange={(e) => setRoleTitle(e.target.value)}
-                className="w-full px-3 py-2 bg-[#0E111A] border border-[#242C40] rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full px-3 py-1.5 bg-[#08090C] border border-white/[0.08] rounded-lg text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/20"
               />
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {COMMON_ROLES.slice(0, 3).map((cr) => (
@@ -127,7 +129,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                     key={cr}
                     type="button"
                     onClick={() => setRoleTitle(cr)}
-                    className="text-[10px] text-slate-400 hover:text-indigo-300 bg-[#181D2B] px-1.5 py-0.5 rounded"
+                    className="text-[10px] text-zinc-400 hover:text-white bg-zinc-800/80 px-1.5 py-0.5 rounded border border-white/[0.04]"
                   >
                     +{cr.split(' ')[0]}
                   </button>
@@ -136,7 +138,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold text-slate-300 mb-1">
+              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">
                 Monthly Salary ({currency})
               </label>
               <input
@@ -146,16 +148,16 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                 required
                 value={salary}
                 onChange={(e) => setSalary(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-[#0E111A] border border-[#242C40] rounded-lg text-sm text-white font-mono-num focus:outline-none focus:border-indigo-500"
+                className="w-full px-3 py-1.5 bg-[#08090C] border border-white/[0.08] rounded-lg text-xs text-white font-mono focus:outline-none focus:border-white/20"
               />
-              <span className="text-[10px] text-slate-400 block mt-1">
-                Preview: {formatCurrency(salary, currency)}/mo base
+              <span className="text-[10px] text-zinc-400 block mt-1 font-mono">
+                Base: {formatCurrency(salary, currency)}/mo
               </span>
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                Start Month: <span className="text-indigo-400 font-mono-num font-bold">Month {startMonth}</span>
+              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">
+                Start Month: <span className="text-white font-mono font-bold">Month +{startMonth}</span>
               </label>
               <input
                 type="range"
@@ -164,32 +166,33 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                 step={1}
                 value={startMonth}
                 onChange={(e) => setStartMonth(Number(e.target.value))}
-                className="w-full h-2 bg-[#0E111A] rounded-lg appearance-none cursor-pointer accent-indigo-500 mt-2"
+                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer mt-2"
               />
-              <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-mono-num">
+              <div className="flex justify-between text-[10px] text-zinc-400 mt-1 font-mono">
                 <span>Immediate (M0)</span>
-                <span>M6</span>
+                <span>M6 (+180d)</span>
                 <span>M12</span>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4 pt-3 border-t border-[#1E2333]">
-            <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300 hover:text-white select-none">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4 pt-3 border-t border-white/[0.06]">
+            <label className="flex items-center gap-2 cursor-pointer text-xs text-zinc-300 hover:text-white select-none">
               <input
                 type="checkbox"
                 checked={isFullyLoaded}
                 onChange={(e) => setIsFullyLoaded(e.target.checked)}
-                className="w-4 h-4 rounded border-[#242C40] bg-[#0E111A] text-indigo-600 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                className="w-4 h-4 rounded border-zinc-700 bg-zinc-900 text-zinc-100 cursor-pointer"
               />
-              <span className="flex items-center gap-1 font-medium">
-                <Zap className="w-3.5 h-3.5 text-amber-400" /> Apply 1.25x Fully Loaded Multiplier (taxes, SaaS, hardware)
+              <span className="flex items-center gap-1.5 font-medium">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>Apply 1.25x Fully Loaded Multiplier (taxes, equipment, SaaS, insurance)</span>
               </span>
             </label>
 
             <button
               type="submit"
-              className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20 transition-colors"
+              className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-sm transition-colors"
             >
               Confirm Role
             </button>
@@ -197,65 +200,65 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
         </form>
       )}
 
-      {/* Hires List */}
+      {/* Planned Hires List */}
       {hires.length === 0 ? (
-        <div className="text-center py-8 px-4 rounded-xl border border-dashed border-[#1E2333] bg-[#0D1017]">
-          <Users className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-          <p className="text-sm font-medium text-slate-400">Zero planned hires modeled.</p>
-          <p className="text-xs text-slate-500 mt-1">
-            Click "Add Role" above or load the Seed preset to simulate hiring impact.
+        <div className="text-center py-7 px-4 rounded-xl border border-dashed border-white/[0.08] bg-zinc-900/30">
+          <Users className="w-7 h-7 text-zinc-600 mx-auto mb-2" />
+          <p className="text-xs font-medium text-zinc-300">No planned headcount modeled yet.</p>
+          <p className="text-[11px] text-zinc-500 mt-0.5">
+            Click "Add Planned Role" above or load the Seed preset to simulate hiring impact.
           </p>
         </div>
       ) : (
-        <div className="space-y-2.5">
+        <div className="space-y-2">
           {hires.map((hire) => {
             const loadedCost = hire.salaryMonthly * (hire.isFullyLoaded ? LOADED_MULTIPLIER : 1.0);
             return (
               <div
                 key={hire.id}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-[#151926] border border-[#1E2333] hover:border-[#2D354D] transition-colors"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg bg-zinc-900/50 border border-white/[0.06] hover:border-white/[0.12] transition-colors"
               >
                 <div className="flex items-start sm:items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0 mt-0.5 sm:mt-0">
-                    <Briefcase className="w-4 h-4" />
+                  <div className="w-7 h-7 rounded-md bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-zinc-300 shrink-0">
+                    <Briefcase className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-sm text-white">{hire.role}</span>
-                      <span className="text-[10px] font-mono-num font-semibold px-2 py-0.5 rounded bg-[#1C2234] text-slate-300 border border-[#262E44]">
-                        Start: M{hire.startMonthOffset}
+                      <span className="font-medium text-xs text-white">{hire.role}</span>
+                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
+                        Starts M+{hire.startMonthOffset}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5 font-mono-num">
+                    <div className="flex items-center gap-2 text-[11px] text-zinc-400 mt-0.5 font-mono">
                       <span>Base: {formatCurrency(hire.salaryMonthly, currency)}/mo</span>
                       <span>·</span>
-                      <span className="text-indigo-300 font-semibold">
+                      <span className="text-emerald-400 font-medium">
                         Loaded: {formatCurrency(loadedCost, currency)}/mo
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 self-end sm:self-center">
+                <div className="flex items-center gap-2.5 self-end sm:self-center">
                   <button
                     onClick={() => onUpdateHire(hire.id, { isFullyLoaded: !hire.isFullyLoaded })}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border transition-colors ${
+                    className={`flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono rounded border transition-colors ${
                       hire.isFullyLoaded
-                        ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
-                        : 'bg-[#181D2B] text-slate-400 border-[#242C40] hover:text-white'
+                        ? 'bg-amber-500/[0.08] text-amber-300 border-amber-500/20'
+                        : 'bg-zinc-800 text-zinc-400 border-white/[0.06] hover:text-white'
                     }`}
                     title="Toggle 25% overhead multiplier"
                   >
                     <Zap className="w-3 h-3 text-amber-400" />
-                    <span>{hire.isFullyLoaded ? '1.25x Loaded' : 'Base Only'}</span>
+                    <span>{hire.isFullyLoaded ? '1.25x Active' : 'Base Only'}</span>
                   </button>
 
                   <button
                     onClick={() => onRemoveHire(hire.id)}
-                    className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                    className="p-1.5 text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors"
                     title="Remove role from scenario"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -264,15 +267,15 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
         </div>
       )}
 
-      {/* Summary footer */}
+      {/* Summary Footer */}
       {hires.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-[#1E2333] flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-slate-400 gap-2">
+        <div className="mt-3.5 pt-3 border-t border-white/[0.04] flex flex-col sm:flex-row items-start sm:items-center justify-between text-[11px] text-zinc-400 gap-2">
           <div className="flex items-center gap-1.5">
-            <Info className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Fully loaded includes payroll taxes, benefits, hardware, and seat licenses.</span>
+            <Info className="w-3.5 h-3.5 text-zinc-500" />
+            <span>1.25x load factors in payroll taxes, healthcare, MacBook, and SaaS seats.</span>
           </div>
-          <div className="font-mono-num text-slate-200">
-            Peak Headcount Burn: <span className="font-bold text-white">{formatCurrency(totalLoadedMonthly, currency)}/mo</span>
+          <div className="font-mono text-zinc-300">
+            Total Headcount Outflow: <span className="font-bold text-white">{formatCurrency(totalLoadedMonthly, currency)}/mo</span>
           </div>
         </div>
       )}

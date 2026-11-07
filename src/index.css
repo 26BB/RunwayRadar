@@ -2,33 +2,39 @@
 
 @layer base {
   :root {
-    --canvas: #090a0f;
-    --card: #12151e;
-    --border: #1e2333;
-    --emerald-alive: #10b981;
-    --rose-dead: #f43f5e;
-    --amber-warn: #f59e0b;
-    --indigo-accent: #6366f1;
+    --canvas: #08090C;
+    --card-surface: #0D0F15;
+    --card-hover: #12151E;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --border-highlight: rgba(255, 255, 255, 0.20);
+    
+    --alive-emerald: #10B981;
+    --dead-rose: #F43F5E;
+    --warn-amber: #F59E0B;
+    --radar-cyan: #06B6D4;
+    --brand-indigo: #6366F1;
   }
 
   body {
-    background-color: #090a0f;
-    color: #f1f5f9;
+    background-color: #08090C;
+    color: #F8FAFC;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  /* Custom subtle scrollbars */
+  /* Custom Sleek Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #090a0f;
+    background: #08090C;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e2333;
+    background: #1E2333;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -36,7 +42,76 @@
   }
 }
 
+/* Custom Sleek Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #171A24;
+  border-radius: 9999px;
+  height: 5px;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+input[type="range"]:hover {
+  background: #1F2433;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+  border: 2px solid #08090C;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+  border: 2px solid #08090C;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* High-Precision Monospace Tabular Figures */
 .font-mono-num {
   font-family: 'JetBrains Mono', monospace;
-  font-feature-settings: 'tnum' on, 'zero' on;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle Glassmorphic Panel */
+.fintech-card {
+  background-color: #0D0F15;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fintech-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Ambient Radial Glow */
+.canvas-ambient-glow {
+  background-image: 
+    radial-gradient(ellipse 90% 40% at 50% -15%, rgba(99, 102, 241, 0.05), transparent 70%),
+    radial-gradient(ellipse 60% 30% at 100% 0%, rgba(16, 185, 129, 0.03), transparent 60%);
 }
