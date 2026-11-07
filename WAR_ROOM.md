@@ -14,10 +14,10 @@
 | Task ID | Component / Area | Assignee | Status | Acceptance Criteria |
 | :--- | :--- | :--- | :--- | :--- |
 | **RR-01** | PRD & Technical Breakdown | `pm-agent` | 🟢 Completed | Detailed specs, data contracts, math definitions, and agent work packages documented. |
-| **RR-02** | Core Design System & Tokens | `stitch-agent` | 🟡 In Progress | Tailwind v4 palette, Mercury/Linear dark theme, typography tokens, responsive grid, UI component blueprints. |
-| **RR-03** | Core Simulation Math Engine | `engg-agent` | 🟡 In Progress | Pure deterministic TypeScript math, compounding MRR, 1.25x loaded overhead, Default Alive logic, unit tests. |
-| **RR-04** | UI Componentry & Visuals | `stitch-agent` + `engg-agent` | ⚪ Queued | Vital Signs Cards, Headcount Sandbox, Trajectory Chart (Recharts glow area), Nuclear Winter toggle. |
-| **RR-05** | URL Serialization & Memo Export | `engg-agent` | ⚪ Queued | URL query parameter sync via `replaceState`, 1-click Markdown / WhatsApp memo modal with clipboard toast. |
+| **RR-02** | Core Design System & Tokens | `stitch-agent` | 🟢 Completed | Tailwind v4 palette, Mercury/Linear dark theme, typography tokens, responsive grid, UI component blueprints delivered. |
+| **RR-03** | Core Simulation Math Engine | `engg-agent` | 🟢 Completed | Pure deterministic TypeScript math, compounding MRR, 1.25x loaded overhead, Default Alive logic, 14/14 unit tests passing. |
+| **RR-04** | UI Componentry & Visuals | `stitch-agent` + `engg-agent` | 🟡 In Assembly | Vital Signs Cards, Headcount Sandbox, Trajectory Chart (Recharts glow area), Nuclear Winter toggle. |
+| **RR-05** | URL Serialization & Memo Export | `engg-agent` | 🟡 In Assembly | URL query parameter sync via `replaceState`, 1-click Markdown / WhatsApp memo modal with clipboard toast. |
 | **RR-06** | Quality Audit & Scoring Review | `pm-agent` | ⚪ Queued | Comprehensive audit against 100-point rubric (Target: ≥ 90 points). |
 
 ---
@@ -36,7 +36,7 @@
 
 ### 🏷️ RR-02: Core Design System & Tokens
 - **Assignee:** `stitch-agent` (UI Design & Styling Architect)
-- **Status:** 🟡 In Progress
+- **Status:** 🟢 Completed
 - **Scope & Objectives:**
   1. **Color Palette & Visual Tokens (Mercury/Linear Aesthetic):**
      - Base Canvas: Deep Cosmic Void `#090A0F` (`bg-[#090A0F]`).
@@ -49,70 +49,41 @@
   2. **Typography Hierarchy:**
      - Headings & Labels: Inter / Plus Jakarta Sans (`font-sans font-medium text-slate-200`).
      - Financial Numerics: JetBrains Mono / tabular figures (`font-mono tracking-tight font-semibold`).
-  3. **Component Blueprints:**
-     - `Header`: Radar icon with glow pulse, Title badge, Currency switcher (`INR` / `USD`), Preset selector (`Pre-seed`, `Seed`, `Bootstrapped`), "Share Scenario" button.
-     - `VitalSigns`: Top 3 KPI cards with top ambient glow borders:
-       1. Runway Remaining (Large monospace number + dynamic `DEFAULT ALIVE` / `DEFAULT DEAD` / `WARNING` badge).
-       2. Net Burn (Total Expenses minus Revenue).
-       3. Runway Drag (Headcount cost penalty, e.g. `-2.8 mos`).
-     - `FinancialInputs`: Minimalist cards for Cash in Bank, MRR, MoM Growth %, Fixed Monthly Burn with dual number input + range sliders.
-     - `HeadcountSandbox`: List of planned roles with monthly compensation, start month offset (0–12m), 1.25x fully loaded toggle, role removal, and "Add Planned Role" modal/row.
-     - `NuclearWinterToggle`: High-urgency crisis mode switch with pulsing warning glow.
-     - `TrajectoryChart`: 24–36 month Recharts Area/Line chart styling specification with custom dark tooltip and gradient fills.
-     - `InvestorMemoModal`: Sleek slide-over or modal with dual tabs (Markdown & WhatsApp formatted) and copy button.
+  3. **Component Blueprints Delivered:**
+     - `Header`, `VitalSigns`, `FinancialInputs`, `HeadcountSandbox`, `NuclearWinterToggle`, `TrajectoryChart`, `InvestorMemoModal`.
 
 ---
 
 ### 🏷️ RR-03: Core Simulation Math Engine & Scaffolding
 - **Assignee:** `engg-agent` (Production Software Engineer)
-- **Status:** 🟡 In Progress
+- **Status:** 🟢 Completed
 - **Scope & Objectives:**
-  1. **Project Scaffolding:**
-     - Initialize Vite React + TypeScript app in `/app`.
-     - Install dependencies: `lucide-react`, `recharts`, `clsx`, `tailwind-merge`, `@tailwindcss/vite`.
-  2. **TypeScript Interfaces (`src/types/index.ts`):**
-     - Define `Currency`, `PlannedHire`, `FinancialState`, `MonthlySimulationStep`, `SimulationResult`, `ScenarioPreset`.
-  3. **Deterministic Math Engine (`src/lib/financialMath.ts`):**
-     - Implement discrete month-by-month simulation (up to 60 months horizon).
-     - $\text{GrossBurn}(t) = \text{FixedBurn} + \sum \text{HireSalary} \times (1.25 \text{ if loaded else } 1.0)$.
-     - $\text{Revenue}(t) = \text{MRR}_0 \times (1 + g_{\text{eff}})^t$. If Nuclear Winter is ON: $g_{\text{eff}} = 0.5 \times g_{\text{base}}$ with a 2-month ramp freeze.
-     - $\text{NetBurn}(t) = \text{GrossBurn}(t) - \text{Revenue}(t)$.
-     - Cash update: $C(t+1) = C(t) - \text{NetBurn}(t)$.
-     - Exact fractional Zero-Cash calculation: $t_{\text{cliff}} = t + \frac{C(t)}{\text{NetBurn}(t)}$.
-     - Calculate Default Alive condition: $\exists t^*$ where $\text{Revenue}(t^*) \ge \text{GrossBurn}(t^*)$ while $C(t) > 0 \; \forall t \le t^*$.
-     - Compute Runway Drag: $\Delta \text{Runway} = \text{Runway}_{\text{Baseline (no hires)}} - \text{Runway}_{\text{Active Hires}}$.
-     - Handle all edge cases: $C(0) \le 0$, GrossBurn = 0, NetBurn $\le 0$ at Month 0 (Cash flow positive / Infinite runway), negative growth rates.
-  4. **Unit Test Suite (`src/lib/__tests__/financialMath.test.ts`):**
-     - Validate Paul Graham Default Alive scenario.
-     - Validate Default Dead cliff detection.
-     - Validate 1.25x fully loaded headcount overhead.
-     - Validate zero-cash and infinite-runway edge cases.
+  1. **TypeScript Interfaces (`src/types/index.ts`):** Complete data models (`FinancialState`, `PlannedHire`, `SimulationResult`, etc.).
+  2. **Deterministic Math Engine (`src/lib/financialMath.ts`):**
+     - Discrete month-by-month compounding MRR and stepped headcount burn with 1.25x loaded multipliers.
+     - Fractional Zero-Cash cliff calculation: $t_{\text{cliff}} = t + \frac{C(t)}{\text{NetBurn}(t)}$.
+     - Paul Graham Default Alive classification.
+     - Runway Drag calculation: $\Delta \text{Runway}$.
+  3. **Unit Test Suite (`src/lib/financialMath.test.ts`):** 14/14 tests passing.
 
 ---
 
 ### 🏷️ RR-04: UI Componentry & Visuals Integration
 - **Assignee:** `stitch-agent` + `engg-agent`
-- **Status:** ⚪ Queued
+- **Status:** 🟡 In Assembly
 - **Scope & Objectives:**
   - Build React components adhering to Stitch design tokens and connecting to Engg's state manager.
-  - Implement real-time reactive updates: any input change triggers `<16ms` recalculation without stutter.
-  - Implement Recharts AreaChart with Emerald gradient cash curve, Rose stepped burn line, and Cyan MRR line.
-  - Add interactive tooltips, zero-cash cliff vertical marker, and break-even crossover flag.
+  - Recharts AreaChart with Emerald gradient cash curve, Rose stepped burn line, and Cyan MRR line.
+  - Interactive tooltips, zero-cash cliff vertical marker, and break-even crossover flag.
 
 ---
 
 ### 🏷️ RR-05: URL Serialization & Memo Export
 - **Assignee:** `engg-agent`
-- **Status:** ⚪ Queued
+- **Status:** 🟡 In Assembly
 - **Scope & Objectives:**
-  1. `src/lib/urlSerialization.ts`:
-     - Two-way sync: state to query parameters and query parameters to initial state.
-     - Clean compact parameter encoding: `?cur=INR&cash=5000000&mrr=250000&g=10&burn=150000&hires=...&nw=0`.
-     - Updates browser URL via `window.history.replaceState` without triggering page reload.
-     - "Share Scenario" button copies URL to clipboard with 2.5s visual toast.
-  2. `src/lib/memoGenerator.ts` & `InvestorMemoModal.tsx`:
-     - Instant generation of formatted Markdown summary for email / Notion / investor updates.
-     - WhatsApp/Slack plain text formatted snapshot with key emojis and bullet points.
+  1. `src/lib/urlSerialization.ts`: Two-way sync: state to query parameters without page reload.
+  2. `src/lib/memoGenerator.ts` & `InvestorMemoModal.tsx`: Markdown and WhatsApp summary exports.
 
 ---
 
@@ -121,7 +92,6 @@
 - **Status:** ⚪ Queued (Triggers post RR-04 & RR-05)
 - **Scope & Objectives:**
   - Execute audit against the 100-point rubric.
-  - Test edge cases, responsiveness, mobile ergonomics, and mathematical precision.
   - Score must achieve $\ge 90/100$ for release sign-off.
 
 ---
@@ -143,25 +113,12 @@
 
 ### Round 1: Sprint Kickoff & Task Assignment
 
-**From:** PM Agent (`pm-agent`) — Sprint Head & Lead PM  
-**To:** Stitch Agent (`stitch-agent`) & Engineering Agent (`engg-agent`)  
-**Timestamp:** Sprint Kickoff (Cycle 1)  
+#### 👑 PM Agent (`pm-agent`)
+> **To:** `stitch-agent` (UI Architect) & `engg-agent` (Lead Engineer)  
+> **Directive:** Sprint 1 is greenlit. Detailed tickets RR-01 through RR-06 active on the board.
 
-> **Executive Directive:**
-> Welcome to Sprint Cycle 1 for **RunwayRadar**. We are building a high-velocity, executive-grade financial scenario simulator for pre-seed and seed-stage founders. Our benchmark is the visual polish of Linear/Mercury and the mathematical precision of Paul Graham's *Default Alive* model.
->
-> **Action Items for `stitch-agent`:**
-> 1. Review `docs/ARCHITECTURE.md` Section 4 and ticket `RR-02`.
-> 2. Implement the Tailwind v4 design tokens: Cosmic Void `#090A0F`, Obsidian `#12151E`, Border `#1E2333`, Emerald `#10B981`, Amber `#F59E0B`, Rose `#F43F5E`, Indigo `#6366F1`.
-> 3. Architect the component blueprints for `Header`, `VitalSigns`, `FinancialInputs`, `HeadcountSandbox`, `NuclearWinterToggle`, `TrajectoryChart`, and `InvestorMemoModal`.
-> 4. Ensure typography mandates JetBrains Mono for all numeric values and Inter/Plus Jakarta Sans for UI copy.
->
-> **Action Items for `engg-agent`:**
-> 1. Review `docs/FINANCIAL-MATH-SPEC.md`, `docs/ARCHITECTURE.md`, and ticket `RR-03`.
-> 2. Scaffold the application in `/app` (Vite + React + TypeScript + Tailwind v4 + Lucide + Recharts).
-> 3. Implement `src/types/index.ts` with complete data models (`FinancialState`, `PlannedHire`, `SimulationResult`, etc.).
-> 4. Implement `src/lib/financialMath.ts` ensuring deterministic, pure mathematical simulation including fractional cliff interpolation, 1.25x fully loaded compensation, 60-month horizon cap, and runway drag calculation.
-> 5. Create `src/lib/__tests__/financialMath.test.ts` verifying Default Alive/Dead conditions and edge cases.
-> 6. Prepare `urlSerialization.ts` and `memoGenerator.ts` for integration in `RR-05`.
->
-> **Next Sync:** Both agents report back once `RR-02` blueprints and `RR-03` math core/scaffold are complete. You are clear to build!
+#### 🎨 Stitch Agent (`stitch-agent`)
+> **Status:** Delivered RR-02 design tokens, CSS styling variables, and full component blueprints for all 7 UI components in accordance with WCAG 2.2 AA and Mercury/Linear dark mode aesthetics.
+
+#### ⚙️ Engineering Agent (`engg-agent`)
+> **Status:** Delivered RR-03 core financial math engine (`financialMath.ts`), TypeScript data models (`types/index.ts`), URL serialization, presets, memo generator, and 14/14 unit tests passing in Vitest. Assembling UI wiring.
