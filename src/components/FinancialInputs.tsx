@@ -1,7 +1,7 @@
 import React from 'react';
-import { Currency, FinancialState } from '../types';
+import { FinancialState } from '../types';
 import { formatCurrency } from '../lib/financialMath';
-import { DollarSign, IndianRupee, TrendingUp, Building2, Wallet } from 'lucide-react';
+import { TrendingUp, Building2, Wallet } from 'lucide-react';
 
 interface FinancialInputsProps {
   state: FinancialState;

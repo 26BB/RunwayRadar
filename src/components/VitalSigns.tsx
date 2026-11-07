@@ -1,7 +1,7 @@
 import React from 'react';
-import { Currency, FinancialState, SimulationResult } from '../types';
+import { FinancialState, SimulationResult } from '../types';
 import { formatCurrency, calculateHeadcountBurnForMonth } from '../lib/financialMath';
-import { Flame, Clock, Users, ShieldCheck, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { Flame, Clock, Users, ShieldCheck, ShieldAlert } from 'lucide-react';
 
 interface VitalSignsProps {
   state: FinancialState;
@@ -16,7 +16,6 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
 
   // Runway Badge Color
   const isInfinite = !isFinite(result.runwayMonths);
-  const isDead = result.classification === 'DEFAULT_DEAD';
   const isCritical = result.runwayMonths < 6;
   const isWarning = result.runwayMonths >= 6 && result.runwayMonths < 12;
 

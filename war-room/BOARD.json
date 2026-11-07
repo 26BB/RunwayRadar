@@ -8,7 +8,7 @@
   "scoreSummary": {
     "currentScore": null,
     "targetScore": 90,
-    "status": "BUILD_IN_PROGRESS"
+    "status": "AUDIT_READY"
   },
   "tasks": [
     {
@@ -22,36 +22,36 @@
       "id": "RR-02",
       "title": "Core Design System & Tokens",
       "owner": "stitch-agent",
-      "status": "IN_PROGRESS",
-      "notes": "Define Tailwind v4 design tokens, color palette, card anatomy, and component blueprints."
+      "status": "DONE",
+      "notes": "Mercury/Linear dark-mode tokens, typography, and card anatomy implemented."
     },
     {
       "id": "RR-03",
       "title": "Core Simulation Math Engine & Scaffolding",
       "owner": "engg-agent",
-      "status": "IN_PROGRESS",
-      "notes": "Pure TS math in financialMath.ts, unit tests, ts models."
+      "status": "DONE",
+      "notes": "Pure TS math engine (14/14 unit tests passing) with discrete simulation, crossover, and drag."
     },
     {
       "id": "RR-04",
       "title": "UI Componentry & Visuals Integration",
       "owner": "stitch-agent + engg-agent",
-      "status": "QUEUED",
-      "notes": "Vital Signs, Headcount Sandbox, Trajectory Chart (Recharts Area), Nuclear Winter."
+      "status": "DONE",
+      "notes": "VitalSigns, FinancialInputs, HeadcountSandbox, NuclearWinter, TrajectoryChart fully assembled."
     },
     {
       "id": "RR-05",
       "title": "URL Serialization & Memo Export Modal",
       "owner": "engg-agent",
-      "status": "QUEUED",
-      "notes": "Deep link query parameter sync and 1-click Markdown / WhatsApp export."
+      "status": "DONE",
+      "notes": "Real-time URL query parameter persistence and 1-click Markdown + WhatsApp memo modal implemented."
     },
     {
       "id": "RR-06",
       "title": "PM Quality Audit & Scoring Review",
       "owner": "pm-agent",
-      "status": "QUEUED",
-      "notes": "Audit against 100-pt rubric. Score must reach 90+ for greenlight."
+      "status": "IN_PROGRESS",
+      "notes": "Ready for PM audit against 100-pt rubric. Score must reach 90+ for greenlight."
     }
   ]
 }

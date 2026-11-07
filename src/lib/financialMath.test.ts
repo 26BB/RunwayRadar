@@ -138,6 +138,7 @@ describe('Financial Math Engine: Simulation & Classification', () => {
     expect(result.isDefaultAlive).toBe(false);
     expect(result.classification).toBe('DEFAULT_DEAD');
     expect(result.zeroCashDate).toBe('Immediate Cliff');
+    expect(formatZeroCashDate(12, new Date('2026-01-01'))).toBe('Jan 2027');
   });
 
   it('identifies cash flow positive startups at Month 0', () => {

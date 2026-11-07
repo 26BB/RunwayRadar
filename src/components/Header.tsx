@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Currency } from '../types';
 import { PRESETS } from '../lib/presets';
 import { Radio, Share2, FileText, Check, Sparkles } from 'lucide-react';
