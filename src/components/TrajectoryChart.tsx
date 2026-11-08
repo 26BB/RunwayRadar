@@ -45,13 +45,13 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
       : null;
 
   return (
-    <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-5 shadow-sm">
+    <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-3.5 sm:p-5 shadow-sm">
       
       {/* Chart Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3.5 border-b border-white/[0.06] mb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.06] mb-3.5 sm:mb-4">
         <div>
           <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2 text-balance">
-            <ChartIcon className="w-4 h-4 text-zinc-400" />
+            <ChartIcon className="w-4 h-4 text-zinc-400 shrink-0" />
             Financial trajectory and crossover projection
           </h2>
           <p className="text-[11px] text-zinc-400 mt-0.5 text-pretty">
@@ -60,60 +60,62 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
         </div>
 
         {/* Horizon Selector */}
-        <div className="flex items-center gap-1 bg-zinc-900/80 p-0.5 rounded-lg border border-white/[0.06]">
+        <div className="flex items-center gap-1 bg-zinc-900/80 p-0.5 rounded-lg border border-white/[0.06] w-full sm:w-auto justify-between sm:justify-start">
           <span className="text-[11px] text-zinc-400 px-2 select-none">
             Horizon:
           </span>
-          {[12, 24, 36, 60].map((h) => (
-            <button
-              key={h}
-              onClick={() => setHorizon(h)}
-              className={`px-2 py-0.5 text-xs font-medium rounded-md transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
-                horizon === h
-                  ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.1]'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
-            >
-              <span className="font-mono-num">{h}</span>M
-            </button>
-          ))}
+          <div className="flex items-center gap-1">
+            {[12, 24, 36, 60].map((h) => (
+              <button
+                key={h}
+                onClick={() => setHorizon(h)}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+                  horizon === h
+                    ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.1]'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                <span className="font-mono-num">{h}</span>M
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Legend & Milestone Badges */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 text-xs">
-        <div className="flex items-center gap-4 text-[11px] text-zinc-300">
+      <div className="flex flex-col xs:flex-row sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 mb-3.5 sm:mb-4 text-xs">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-zinc-300">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-sm bg-sky-400" />
+            <span className="w-2.5 h-2.5 rounded-sm bg-sky-400 shrink-0" />
             <span>Cash reserves</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-sm bg-emerald-400" />
+            <span className="w-2.5 h-2.5 rounded-sm bg-emerald-400 shrink-0" />
             <span>Revenue (MRR)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-0.5 bg-rose-400" />
+            <span className="w-2.5 h-0.5 bg-rose-400 shrink-0" />
             <span>Gross burn</span>
           </div>
         </div>
 
         {result.isDefaultAlive ? (
           <div className="flex items-center gap-1.5 text-emerald-400 text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/[0.08] border border-emerald-500/20 font-medium">
-            <CheckCircle2 className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
             <span>Breakeven crossover: Month <span className="font-mono-num">{result.breakevenMonth}</span></span>
           </div>
         ) : (
           <div className="flex items-center gap-1.5 text-rose-400 text-[11px] px-2 py-0.5 rounded-md bg-rose-500/[0.08] border border-rose-500/20 font-medium">
-            <AlertTriangle className="w-3.5 h-3.5" />
+            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
             <span>Zero cash cliff: <span className="font-mono-num">{result.runwayMonths.toFixed(1)}</span> months</span>
           </div>
         )}
       </div>
 
       {/* Recharts Area Canvas */}
-      <div className="w-full h-72 sm:h-80">
+      <div className="w-full h-64 sm:h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -5, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
               <linearGradient id="cashFillGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#38BDF8" stopOpacity={0.12} />
@@ -134,6 +136,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
               tickLine={false}
               axisLine={false}
               fontFamily="JetBrains Mono"
+              minTickGap={16}
             />
             
             <YAxis
@@ -142,6 +145,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
               tickLine={false}
               axisLine={false}
               fontFamily="JetBrains Mono"
+              width={52}
               tickFormatter={(v) => formatCurrency(v, currency)}
             />
 

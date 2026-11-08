@@ -128,6 +128,15 @@ input[type="range"]::-moz-range-thumb {
   letter-spacing: -0.02em;
 }
 
+/* Touch-optimized horizontal scrollbar suppression */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* Subtle Institutional Panel */
 .fintech-card {
   background-color: var(--card-surface);

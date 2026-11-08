@@ -15,16 +15,16 @@ export const NuclearWinterToggle: React.FC<NuclearWinterToggleProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-xl border p-4.5 transition-colors duration-150 ${
+      className={`rounded-xl border p-3.5 sm:p-4.5 transition-colors duration-150 ${
         isNuclearWinter
           ? 'bg-rose-500/[0.04] border-rose-500/30'
           : 'bg-[var(--card-surface)] border-white/[0.06] hover:border-white/[0.1]'
       }`}
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-start gap-3">
           <div
-            className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 border mt-0.5 sm:mt-0 ${
               isNuclearWinter
                 ? 'bg-rose-500/10 text-rose-400 border-rose-500/30'
                 : 'bg-white/[0.04] text-zinc-400 border-white/[0.08]'
@@ -37,12 +37,12 @@ export const NuclearWinterToggle: React.FC<NuclearWinterToggleProps> = ({
             )}
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-sm font-semibold text-white tracking-tight text-balance">
                 Macro shock simulation: &lsquo;Nuclear winter&rsquo; mode
               </h3>
               {isNuclearWinter && (
-                <span className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-rose-500 text-white">
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-rose-500 text-white whitespace-nowrap">
                   Stress-test active
                 </span>
               )}
@@ -54,7 +54,7 @@ export const NuclearWinterToggle: React.FC<NuclearWinterToggleProps> = ({
         </div>
 
         {/* Switch Toggle */}
-        <div className="flex items-center gap-3 self-end sm:self-center">
+        <div className="flex items-center justify-between w-full sm:w-auto gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/[0.04]">
           <span className="text-xs text-zinc-400 font-medium">
             {isNuclearWinter ? 'Headwinds active' : 'Normal conditions'}
           </span>
@@ -63,12 +63,12 @@ export const NuclearWinterToggle: React.FC<NuclearWinterToggleProps> = ({
             role="switch"
             aria-checked={isNuclearWinter}
             onClick={() => onToggle(!isNuclearWinter)}
-            className={`relative inline-flex h-5 w-10 shrink-0 cursor-pointer rounded-full border border-white/[0.1] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-white/[0.1] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
               isNuclearWinter ? 'bg-rose-600' : 'bg-zinc-800'
             }`}
           >
             <span
-              className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-sm motion-safe:transition-transform duration-150 ${
+              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm motion-safe:transition-transform duration-150 ${
                 isNuclearWinter ? 'translate-x-5' : 'translate-x-0.5'
               }`}
             />

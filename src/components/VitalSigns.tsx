@@ -45,25 +45,25 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
   const coverageRatio = Math.min(100, Math.round((currentMRR / (initialGrossBurn || 1)) * 100));
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5">
       
       {/* 1. Runway Horizon */}
-      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
-        <div className="flex items-center justify-between mb-2.5">
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-3.5 sm:p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
+        <div className="flex items-center justify-between mb-2 sm:mb-2.5">
           <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
-            <Clock className="w-3.5 h-3.5 text-zinc-400" /> Runway horizon
+            <Clock className="w-3.5 h-3.5 text-zinc-400 shrink-0" /> Runway horizon
           </span>
           <span className={`text-[11px] px-2 py-0.5 rounded-full border font-medium ${runwayBadge.colorClass}`}>
             {runwayBadge.text}
           </span>
         </div>
 
-        <div className="my-1.5">
-          <div className="text-3xl font-bold tracking-tight text-white font-mono-num flex items-baseline gap-2">
+        <div className="my-1 sm:my-1.5">
+          <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-mono-num flex items-baseline gap-1.5 sm:gap-2">
             {isInfinite ? (
-              <span className="flex items-center gap-1.5 text-2xl font-semibold text-emerald-400">
+              <span className="flex items-center gap-1.5 text-xl sm:text-2xl font-semibold text-emerald-400">
                 <span>∞</span>
-                <span className="text-sm font-sans font-medium text-zinc-300">Self-sustaining</span>
+                <span className="text-xs sm:text-sm font-sans font-medium text-zinc-300">Self-sustaining</span>
               </span>
             ) : (
               <>
@@ -79,7 +79,7 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
         </div>
 
         {/* Visual Runway Meter */}
-        <div className="mt-3 pt-2.5 border-t border-white/[0.04]">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-white/[0.04]">
           <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
             <span>0m (cliff)</span>
             <span>12m</span>
@@ -103,10 +103,10 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
       </div>
 
       {/* 2. Monthly Net Burn */}
-      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
-        <div className="flex items-center justify-between mb-2.5">
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-3.5 sm:p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
+        <div className="flex items-center justify-between mb-2 sm:mb-2.5">
           <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
-            <Flame className="w-3.5 h-3.5 text-zinc-400" /> Monthly net burn
+            <Flame className="w-3.5 h-3.5 text-zinc-400 shrink-0" /> Monthly net burn
           </span>
           <span className={`text-[11px] px-2 py-0.5 rounded-full border font-medium ${
             initialNetBurn <= 0
@@ -117,8 +117,8 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
           </span>
         </div>
 
-        <div className="my-1.5">
-          <div className={`text-3xl font-bold tracking-tight font-mono-num flex items-baseline gap-1 ${
+        <div className="my-1 sm:my-1.5">
+          <div className={`text-2xl sm:text-3xl font-bold tracking-tight font-mono-num flex items-baseline gap-1 ${
             initialNetBurn <= 0 ? 'text-emerald-400' : 'text-rose-400'
           }`}>
             <span>{initialNetBurn <= 0 ? '+' : '-'}{formatCurrency(Math.abs(initialNetBurn), currency)}</span>
@@ -131,7 +131,7 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
         </div>
 
         {/* Coverage Meter */}
-        <div className="mt-3 pt-2.5 border-t border-white/[0.04]">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-white/[0.04]">
           <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
             <span>Revenue inflow</span>
             <span className="text-emerald-400 font-mono-num font-medium">{formatCurrency(currentMRR, currency)} ({coverageRatio}%)</span>
@@ -146,18 +146,18 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
       </div>
 
       {/* 3. Headcount Runway Drag */}
-      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
-        <div className="flex items-center justify-between mb-2.5">
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-3.5 sm:p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
+        <div className="flex items-center justify-between mb-2 sm:mb-2.5">
           <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
-            <Users className="w-3.5 h-3.5 text-zinc-400" /> Headcount drag
+            <Users className="w-3.5 h-3.5 text-zinc-400 shrink-0" /> Headcount drag
           </span>
           <span className="text-[11px] px-2 py-0.5 rounded-full border bg-white/[0.04] text-zinc-300 border-white/[0.08] font-medium">
             {hires.length} planned {hires.length === 1 ? 'role' : 'roles'}
           </span>
         </div>
 
-        <div className="my-1.5">
-          <div className="text-3xl font-bold tracking-tight font-mono-num flex items-baseline gap-1 text-white">
+        <div className="my-1 sm:my-1.5">
+          <div className="text-2xl sm:text-3xl font-bold tracking-tight font-mono-num flex items-baseline gap-1 text-white">
             <span className={result.runwayDragFromHires > 0 ? 'text-rose-400' : 'text-zinc-200'}>
               {result.runwayDragFromHires > 0 ? `-${result.runwayDragFromHires.toFixed(1)}` : '0.0'}
             </span>
@@ -171,29 +171,29 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
           </p>
         </div>
 
-        <div className="mt-3 pt-2.5 border-t border-white/[0.04] flex items-center justify-between text-[11px] text-zinc-400">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-white/[0.04] flex items-center justify-between text-[11px] text-zinc-400">
           <span>Loaded multiplier</span>
           <span className="text-indigo-400 font-medium">1.25x active overhead</span>
         </div>
       </div>
 
       {/* 4. Paul Graham Default Alive Verdict */}
-      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
-        <div className="flex items-center justify-between mb-2.5">
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-3.5 sm:p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
+        <div className="flex items-center justify-between mb-2 sm:mb-2.5">
           <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
-            <Activity className="w-3.5 h-3.5 text-zinc-400" /> Paul Graham test
+            <Activity className="w-3.5 h-3.5 text-zinc-400 shrink-0" /> Paul Graham test
           </span>
           <span className="text-[11px] px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06] font-medium">
             YC framework
           </span>
         </div>
 
-        <div className="my-1.5">
+        <div className="my-1 sm:my-1.5">
           <div className="flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${
+            <span className={`w-2 h-2 rounded-full shrink-0 ${
               result.isDefaultAlive ? 'bg-emerald-400' : 'bg-rose-400'
             }`} />
-            <span className={`text-xl font-bold tracking-tight ${
+            <span className={`text-lg sm:text-xl font-bold tracking-tight ${
               result.isDefaultAlive ? 'text-emerald-400' : 'text-rose-400'
             }`}>
               {result.classification === 'CASH_FLOW_POSITIVE'
@@ -212,15 +212,15 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
           </p>
         </div>
 
-        <div className="mt-3 pt-2.5 border-t border-white/[0.04] flex items-center justify-between text-[11px]">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-white/[0.04] flex items-center justify-between text-[11px]">
           {result.isDefaultAlive ? (
             <span className="flex items-center gap-1 text-emerald-400 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
               <span>Self-sustaining trajectory</span>
             </span>
           ) : (
             <span className="flex items-center gap-1 text-rose-400 font-medium">
-              <AlertCircle className="w-3.5 h-3.5" />
+              <AlertCircle className="w-3.5 h-3.5 shrink-0" />
               <span>Intervention needed</span>
             </span>
           )}

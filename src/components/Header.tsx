@@ -23,14 +23,14 @@ export const Header: React.FC<HeaderProps> = ({
   isCopied,
 }) => {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] bg-[var(--canvas)]/85 backdrop-blur-xl px-4 lg:px-8 py-3 transition-colors duration-150">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3.5">
+    <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] bg-[var(--canvas)]/90 backdrop-blur-xl px-3.5 sm:px-6 lg:px-8 py-2.5 sm:py-3 transition-colors duration-150">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 sm:gap-3.5">
         
-        {/* Brand & Identity */}
-        <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-          <div className="flex items-center gap-3">
+        {/* Brand & Identity Row */}
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Custom Precision Radar Emblem */}
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] shadow-inner text-zinc-100">
+            <div className="relative flex items-center justify-center w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-lg bg-zinc-900 border border-white/[0.08] shadow-inner text-zinc-100 shrink-0">
               <svg aria-hidden="true" className="w-4 h-4 text-zinc-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M19.07 4.93a10 10 0 0 0-14.14 0" />
                 <path d="M16.24 7.76a6 6 0 0 0-8.49 0" />
@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="font-semibold text-sm tracking-tight text-white">
                   RunwayRadar
                 </span>
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-400 border border-white/[0.06]">
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-400 border border-white/[0.06] whitespace-nowrap">
                   Founder war room
                 </span>
               </div>
@@ -55,11 +55,11 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Mobile Currency Selector */}
-          <div className="flex md:hidden items-center bg-zinc-900/90 p-0.5 rounded-lg border border-white/[0.08]">
+          {/* Mobile Currency Switcher */}
+          <div className="flex md:hidden items-center bg-zinc-900/90 p-0.5 rounded-lg border border-white/[0.08] shrink-0">
             <button
               onClick={() => onCurrencyChange('INR')}
-              className={`px-2 py-1 text-xs font-medium rounded transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+              className={`px-2.5 py-1 text-xs font-medium rounded transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
                 currency === 'INR' ? 'bg-white text-zinc-950 font-semibold shadow-xs' : 'text-zinc-400 hover:text-white'
               }`}
             >
@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onCurrencyChange('USD')}
-              className={`px-2 py-1 text-xs font-medium rounded transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+              className={`px-2.5 py-1 text-xs font-medium rounded transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
                 currency === 'USD' ? 'bg-white text-zinc-950 font-semibold shadow-xs' : 'text-zinc-400 hover:text-white'
               }`}
             >
@@ -76,32 +76,34 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Center: Minimalist Preset Segmented Switcher */}
-        <div className="flex items-center gap-1 bg-zinc-900/80 p-1 rounded-xl border border-white/[0.06] overflow-x-auto max-w-full">
-          <span className="text-[11px] text-zinc-400 px-2 select-none">
+        {/* Center: Minimalist Preset Segmented Switcher with Touch Momentum Scrolling */}
+        <div className="flex items-center gap-1 bg-zinc-900/80 p-1 rounded-xl border border-white/[0.06] overflow-x-auto scrollbar-none w-full md:w-auto -mx-1 px-1 sm:mx-0">
+          <span className="text-[11px] text-zinc-400 px-1.5 select-none shrink-0">
             Presets:
           </span>
-          {Object.values(PRESETS).map((p) => {
-            const isSelected = activePresetId === p.id;
-            return (
-              <button
-                key={p.id}
-                onClick={() => onSelectPreset(p.id)}
-                className={`px-2.5 py-1 text-xs font-medium rounded-lg whitespace-nowrap transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  isSelected
-                    ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.12]'
-                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
-                }`}
-                title={p.description}
-              >
-                {p.name}
-              </button>
-            );
-          })}
+          <div className="flex items-center gap-1">
+            {Object.values(PRESETS).map((p) => {
+              const isSelected = activePresetId === p.id;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => onSelectPreset(p.id)}
+                  className={`px-2.5 py-1 text-xs font-medium rounded-lg whitespace-nowrap transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isSelected
+                      ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.12]'
+                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
+                  }`}
+                  title={p.description}
+                >
+                  {p.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Right Actions: Currency, Share & Memo Export */}
-        <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
+        {/* Right Actions: Desktop Currency, Share & Memo Export */}
+        <div className="flex items-center gap-2 w-full md:w-auto justify-end">
           {/* Desktop Currency Toggle */}
           <div className="hidden md:flex items-center bg-zinc-900/90 p-0.5 rounded-lg border border-white/[0.08]">
             <button
@@ -125,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Share Scenario Link */}
           <button
             onClick={onShare}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/[0.08] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 md:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 min-h-[34px] sm:min-h-0 text-xs font-medium rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/[0.08] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
             title="Copy shareable link with current scenario state"
           >
             {isCopied ? (
@@ -144,7 +146,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Investor Memo Export Button */}
           <button
             onClick={onOpenMemo}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 md:flex-none flex items-center justify-center gap-1.5 px-3.5 py-1.5 min-h-[34px] sm:min-h-0 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Export memo</span>
