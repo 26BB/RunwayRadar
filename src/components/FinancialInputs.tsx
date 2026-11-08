@@ -25,10 +25,10 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
     <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.06] mb-5">
         <div>
-          <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2 text-balance">
             <Wallet className="w-4 h-4 text-zinc-400" /> Core capital and growth parameters
           </h2>
-          <p className="text-[11px] text-zinc-400 mt-0.5">Calibrate bank reserves, current MRR baseline, and non-payroll burn</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5 text-pretty">Calibrate bank reserves, current MRR baseline, and non-payroll burn</p>
         </div>
         <div className="px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08] text-[11px] font-medium">
           {currency} mode

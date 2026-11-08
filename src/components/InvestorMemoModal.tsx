@@ -62,10 +62,10 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2 text-balance">
               <FileText className="w-4 h-4 text-zinc-400" /> Executive and investor memo export
             </h3>
-            <p className="text-[11px] text-zinc-400 mt-0.5">
+            <p className="text-[11px] text-zinc-400 mt-0.5 text-pretty">
               Instant standardized updates for Notion, WhatsApp, Slack, or board communications
             </p>
           </div>

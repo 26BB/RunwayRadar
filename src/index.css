@@ -140,10 +140,3 @@ input[type="range"]::-moz-range-thumb {
 .fintech-card:hover {
   border-color: var(--border-hairline-hover);
 }
-
-/* Ambient Radial Illuminations */
-.canvas-ambient-glow {
-  background-image: 
-    radial-gradient(ellipse 70% 30% at 50% -10%, var(--glow-slate), transparent 70%),
-    radial-gradient(ellipse 50% 25% at 100% 0%, var(--glow-emerald), transparent 60%);
-}

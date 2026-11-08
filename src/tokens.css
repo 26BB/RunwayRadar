@@ -22,8 +22,6 @@
   --thumb-tint: oklch(0.98 0.005 260);
 
   --shadow-thumb-color: rgba(0, 0, 0, 0.4);
-  --glow-slate: oklch(0.26 0.03 260 / 0.12);
-  --glow-emerald: oklch(0.72 0.17 155 / 0.03);
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;

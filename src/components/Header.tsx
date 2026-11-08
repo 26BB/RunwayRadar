@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <circle cx="12" cy="12" r="2" fill="var(--primary-emerald)" stroke="var(--primary-emerald)" />
                 <path d="M12 12l4-4" stroke="var(--primary-emerald)" strokeWidth="2" />
               </svg>
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[var(--canvas)] motion-safe:animate-pulse" />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[var(--canvas)]" />
             </div>
 
             <div>

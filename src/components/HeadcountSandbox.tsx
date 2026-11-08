@@ -68,14 +68,14 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3.5 border-b border-white/[0.06] mb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2 text-balance">
               <Users className="w-4 h-4 text-zinc-400" /> Headcount sandbox (what-if hiring)
             </h2>
             <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
               <span className="font-mono-num">{hires.length}</span> {hires.length === 1 ? 'role' : 'roles'}
             </span>
           </div>
-          <p className="text-[11px] text-zinc-400 mt-0.5">
+          <p className="text-[11px] text-zinc-400 mt-0.5 text-pretty">
             Model planned hiring timeline and calculate runway drag in real-time
           </p>
         </div>

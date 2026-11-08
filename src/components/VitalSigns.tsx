@@ -22,26 +22,22 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
   let runwayBadge = {
     text: 'Safe buffer (>12m)',
     colorClass: 'bg-emerald-500/[0.08] text-emerald-400 border-emerald-500/20',
-    topBorder: 'border-t-emerald-500/60',
   };
 
   if (isInfinite) {
     runwayBadge = {
       text: 'Self-sustaining',
       colorClass: 'bg-emerald-500/[0.08] text-emerald-400 border-emerald-500/20',
-      topBorder: 'border-t-emerald-500/60',
     };
   } else if (isCritical) {
     runwayBadge = {
       text: 'Critical cliff (<6m)',
-      colorClass: 'bg-rose-500/[0.08] text-rose-400 border-rose-500/20 motion-safe:animate-pulse',
-      topBorder: 'border-t-rose-500/80',
+      colorClass: 'bg-rose-500/[0.08] text-rose-400 border-rose-500/20',
     };
   } else if (isWarning) {
     runwayBadge = {
       text: 'Caution window (6–12m)',
       colorClass: 'bg-amber-500/[0.08] text-amber-400 border-amber-500/20',
-      topBorder: 'border-t-amber-500/70',
     };
   }
 
@@ -52,9 +48,9 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
       
       {/* 1. Runway Horizon */}
-      <div className={`bg-[var(--card-surface)] border border-white/[0.06] ${runwayBadge.topBorder} rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150`}>
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
         <div className="flex items-center justify-between mb-2.5">
-          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
             <Clock className="w-3.5 h-3.5 text-zinc-400" /> Runway horizon
           </span>
           <span className={`text-[11px] px-2 py-0.5 rounded-full border font-medium ${runwayBadge.colorClass}`}>
@@ -107,11 +103,9 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
       </div>
 
       {/* 2. Monthly Net Burn */}
-      <div className={`bg-[var(--card-surface)] border border-white/[0.06] ${
-        initialNetBurn <= 0 ? 'border-t-emerald-500/60' : 'border-t-rose-500/60'
-      } rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150`}>
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
         <div className="flex items-center justify-between mb-2.5">
-          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
             <Flame className="w-3.5 h-3.5 text-zinc-400" /> Monthly net burn
           </span>
           <span className={`text-[11px] px-2 py-0.5 rounded-full border font-medium ${
@@ -152,9 +146,9 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
       </div>
 
       {/* 3. Headcount Runway Drag */}
-      <div className="bg-[var(--card-surface)] border border-white/[0.06] border-t-indigo-500/60 rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
         <div className="flex items-center justify-between mb-2.5">
-          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
             <Users className="w-3.5 h-3.5 text-zinc-400" /> Headcount drag
           </span>
           <span className="text-[11px] px-2 py-0.5 rounded-full border bg-white/[0.04] text-zinc-300 border-white/[0.08] font-medium">
@@ -184,11 +178,9 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
       </div>
 
       {/* 4. Paul Graham Default Alive Verdict */}
-      <div className={`bg-[var(--card-surface)] border border-white/[0.06] ${
-        result.isDefaultAlive ? 'border-t-emerald-500/80' : 'border-t-rose-500/80'
-      } rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150`}>
+      <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-4.5 flex flex-col justify-between shadow-sm hover:border-white/[0.12] transition-colors duration-150">
         <div className="flex items-center justify-between mb-2.5">
-          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+          <span className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium text-balance">
             <Activity className="w-3.5 h-3.5 text-zinc-400" /> Paul Graham test
           </span>
           <span className="text-[11px] px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06] font-medium">
@@ -199,7 +191,7 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
         <div className="my-1.5">
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${
-              result.isDefaultAlive ? 'bg-emerald-400 motion-safe:animate-pulse' : 'bg-rose-400'
+              result.isDefaultAlive ? 'bg-emerald-400' : 'bg-rose-400'
             }`} />
             <span className={`text-xl font-bold tracking-tight ${
               result.isDefaultAlive ? 'text-emerald-400' : 'text-rose-400'
@@ -211,7 +203,7 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
                 : 'Default Dead'}
             </span>
           </div>
-          <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+          <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed text-pretty">
             {result.classification === 'CASH_FLOW_POSITIVE'
               ? 'Revenue already covers all operating expenses.'
               : result.isDefaultAlive
@@ -232,7 +224,7 @@ export const VitalSigns: React.FC<VitalSignsProps> = ({ state, result }) => {
               <span>Intervention needed</span>
             </span>
           )}
-          <span className="text-zinc-400 text-[10px]">Discrete compounding</span>
+          <span className="text-zinc-400 text-[11px]">Discrete compounding</span>
         </div>
       </div>
 

@@ -153,7 +153,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--canvas)] text-[var(--text-high)] flex flex-col font-sans selection:bg-white/[0.1] canvas-ambient-glow">
+    <div className="min-h-screen bg-[var(--canvas)] text-[var(--text-high)] flex flex-col font-sans selection:bg-white/[0.1]">
       {/* Top Navigation */}
       <Header
         currency={financialState.currency}
@@ -196,7 +196,7 @@ export const App: React.FC = () => {
 
       {/* Feedback Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-5 right-5 z-50 bg-zinc-900 border border-white/[0.12] text-zinc-100 px-3.5 py-2 rounded-lg shadow-lg text-xs font-medium flex items-center gap-2">
+        <div className="fixed bottom-5 right-5 z-50 bg-zinc-900 border border-white/[0.12] text-zinc-100 px-3.5 py-2 rounded-lg text-xs font-medium flex items-center gap-2">
           <Check className="w-3.5 h-3.5 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>

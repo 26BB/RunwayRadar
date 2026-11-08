@@ -50,11 +50,11 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
       {/* Chart Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3.5 border-b border-white/[0.06] mb-4">
         <div>
-          <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2 text-balance">
             <ChartIcon className="w-4 h-4 text-zinc-400" />
             Financial trajectory and crossover projection
           </h2>
-          <p className="text-[11px] text-zinc-400 mt-0.5">
+          <p className="text-[11px] text-zinc-400 mt-0.5 text-pretty">
             Cash reserves vs compounding revenue curve and stepped operational burn
           </p>
         </div>
@@ -130,7 +130,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
             <XAxis
               dataKey="name"
               stroke="#64748B"
-              fontSize={10}
+              fontSize={11}
               tickLine={false}
               axisLine={false}
               fontFamily="JetBrains Mono"
@@ -138,7 +138,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
             
             <YAxis
               stroke="#64748B"
-              fontSize={10}
+              fontSize={11}
               tickLine={false}
               axisLine={false}
               fontFamily="JetBrains Mono"
@@ -186,7 +186,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
                 label={{
                   value: 'Breakeven Crossover',
                   fill: '#10B981',
-                  fontSize: 10,
+                  fontSize: 11,
                   position: 'insideTopRight',
                   fontFamily: 'JetBrains Mono',
                 }}
@@ -202,7 +202,7 @@ export const TrajectoryChart: React.FC<TrajectoryChartProps> = ({ result, curren
                 label={{
                   value: 'Zero Cash Cliff',
                   fill: '#F43F5E',
-                  fontSize: 10,
+                  fontSize: 11,
                   position: 'insideTopLeft',
                   fontFamily: 'JetBrains Mono',
                 }}

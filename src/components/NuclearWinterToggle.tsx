@@ -38,16 +38,16 @@ export const NuclearWinterToggle: React.FC<NuclearWinterToggleProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-semibold text-white tracking-tight">
+              <h3 className="text-sm font-semibold text-white tracking-tight text-balance">
                 Macro shock simulation: &lsquo;Nuclear winter&rsquo; mode
               </h3>
               {isNuclearWinter && (
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-rose-500 text-white">
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-rose-500 text-white">
                   Stress-test active
                 </span>
               )}
             </div>
-            <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+            <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed text-pretty">
               Stress-test survival under severe macro shocks: 50% revenue growth penalty & 60-day customer conversion freeze.
             </p>
           </div>
