@@ -22,16 +22,16 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
   const burnStep = isINR ? 50000 : 2500;
 
   return (
-    <div className="bg-[#0D0F15] border border-white/[0.06] rounded-xl p-5 shadow-sm">
+    <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.06] mb-5">
         <div>
           <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
-            <Wallet className="w-4 h-4 text-zinc-400" /> Core Capital & Growth Parameters
+            <Wallet className="w-4 h-4 text-zinc-400" /> Core capital and growth parameters
           </h2>
           <p className="text-[11px] text-zinc-400 mt-0.5">Calibrate bank reserves, current MRR baseline, and non-payroll burn</p>
         </div>
-        <div className="px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08] text-[10px] font-mono uppercase tracking-wider font-semibold">
-          {currency} Mode
+        <div className="px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08] text-[11px] font-medium">
+          {currency} mode
         </div>
       </div>
 
@@ -39,10 +39,10 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
         {/* 1. Cash In Bank */}
         <div className="space-y-2 p-3.5 rounded-lg bg-zinc-900/40 border border-white/[0.04]">
           <div className="flex justify-between items-center">
-            <label className="text-[11px] font-mono uppercase tracking-widest text-zinc-400">
-              Cash In Bank
+            <label className="text-xs text-zinc-400 font-medium">
+              Cash in bank
             </label>
-            <span className="font-mono text-sm font-bold text-white px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
+            <span className="font-mono-num text-sm font-bold text-white px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
               {formatCurrency(cashInBank, currency)}
             </span>
           </div>
@@ -57,35 +57,35 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
               className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
             />
           </div>
-          <div className="flex items-center justify-between text-[10px] text-zinc-400 font-mono">
-            <span>{formatCurrency(0, currency)}</span>
+          <div className="flex items-center justify-between text-[11px] text-zinc-400">
+            <span className="font-mono-num">{formatCurrency(0, currency)}</span>
             <div className="flex gap-1">
               <button
                 type="button"
                 onClick={() => onChange({ cashInBank: Math.max(0, cashInBank - (isINR ? 1000000 : 25000)) })}
-                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] border border-white/[0.04]"
+                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] border border-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 -{isINR ? '₹10L' : '$25k'}
               </button>
               <button
                 type="button"
                 onClick={() => onChange({ cashInBank: cashInBank + (isINR ? 1000000 : 25000) })}
-                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] border border-white/[0.04]"
+                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] border border-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 +{isINR ? '₹10L' : '$25k'}
               </button>
             </div>
-            <span>{formatCurrency(cashMax, currency)}</span>
+            <span className="font-mono-num">{formatCurrency(cashMax, currency)}</span>
           </div>
         </div>
 
         {/* 2. Current MRR */}
         <div className="space-y-2 p-3.5 rounded-lg bg-zinc-900/40 border border-white/[0.04]">
           <div className="flex justify-between items-center">
-            <label className="text-[11px] font-mono uppercase tracking-widest text-zinc-400">
-              Current MRR (Revenue)
+            <label className="text-xs text-zinc-400 font-medium">
+              Current MRR (revenue)
             </label>
-            <span className="font-mono text-sm font-bold text-emerald-400 px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
+            <span className="font-mono-num text-sm font-bold text-emerald-400 px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
               {formatCurrency(currentMRR, currency)}
             </span>
           </div>
@@ -100,35 +100,35 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
               className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
             />
           </div>
-          <div className="flex items-center justify-between text-[10px] text-zinc-400 font-mono">
-            <span>{formatCurrency(0, currency)}</span>
+          <div className="flex items-center justify-between text-[11px] text-zinc-400">
+            <span className="font-mono-num">{formatCurrency(0, currency)}</span>
             <div className="flex gap-1">
               <button
                 type="button"
                 onClick={() => onChange({ currentMRR: Math.max(0, currentMRR - (isINR ? 50000 : 2500)) })}
-                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] border border-white/[0.04]"
+                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] border border-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 -{isINR ? '₹50k' : '$2.5k'}
               </button>
               <button
                 type="button"
                 onClick={() => onChange({ currentMRR: currentMRR + (isINR ? 50000 : 2500) })}
-                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] border border-white/[0.04]"
+                className="px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] border border-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 +{isINR ? '₹50k' : '$2.5k'}
               </button>
             </div>
-            <span>{formatCurrency(mrrMax, currency)}</span>
+            <span className="font-mono-num">{formatCurrency(mrrMax, currency)}</span>
           </div>
         </div>
 
         {/* 3. Expected MoM Growth */}
         <div className="space-y-2 p-3.5 rounded-lg bg-zinc-900/40 border border-white/[0.04]">
           <div className="flex justify-between items-center">
-            <label className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
-              <TrendingUp className="w-3.5 h-3.5 text-zinc-400" /> MoM Revenue Growth
+            <label className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+              <TrendingUp className="w-3.5 h-3.5 text-zinc-400" /> MoM revenue growth
             </label>
-            <span className={`font-mono text-sm font-bold px-2 py-0.5 rounded border ${
+            <span className={`text-sm font-bold px-2 py-0.5 rounded border ${
               growthPercent >= 15
                 ? 'bg-emerald-500/[0.08] text-emerald-400 border-emerald-500/20'
                 : growthPercent >= 5
@@ -137,7 +137,7 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
                 ? 'bg-amber-500/[0.08] text-amber-400 border-amber-500/20'
                 : 'bg-rose-500/[0.08] text-rose-400 border-rose-500/20'
             }`}>
-              {growthPercent > 0 ? `+${growthPercent}%` : `${growthPercent}%`} MoM
+              <span className="font-mono-num">{growthPercent > 0 ? `+${growthPercent}%` : `${growthPercent}%`}</span> MoM
             </span>
           </div>
           <div className="pt-1">
@@ -151,7 +151,7 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
               className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
             />
           </div>
-          <div className="flex items-center justify-between text-[10px] text-zinc-400 font-mono">
+          <div className="flex items-center justify-between text-[11px]">
             <span className="text-rose-400">-10% Churn</span>
             <span className="text-zinc-400">0% Stagnant</span>
             <span className="text-emerald-400">+50% Hypergrowth</span>
@@ -161,10 +161,10 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
         {/* 4. Fixed Monthly Non-Payroll OPEX */}
         <div className="space-y-2 p-3.5 rounded-lg bg-zinc-900/40 border border-white/[0.04]">
           <div className="flex justify-between items-center">
-            <label className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
-              <Building2 className="w-3.5 h-3.5 text-zinc-400" /> Fixed Non-Payroll OPEX
+            <label className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
+              <Building2 className="w-3.5 h-3.5 text-zinc-400" /> Fixed non-payroll OPEX
             </label>
-            <span className="font-mono text-sm font-bold text-white px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
+            <span className="font-mono-num text-sm font-bold text-white px-2 py-0.5 bg-zinc-900 border border-white/[0.08] rounded">
               {formatCurrency(fixedMonthlyBurn, currency)}
             </span>
           </div>
@@ -179,10 +179,10 @@ export const FinancialInputs: React.FC<FinancialInputsProps> = ({ state, onChang
               className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
             />
           </div>
-          <div className="flex items-center justify-between text-[10px] text-zinc-400 font-mono">
-            <span>{formatCurrency(0, currency)}</span>
-            <span className="text-[9px] text-zinc-400">AWS, SaaS, Office, Legal</span>
-            <span>{formatCurrency(burnMax, currency)}</span>
+          <div className="flex items-center justify-between text-[11px] text-zinc-400">
+            <span className="font-mono-num">{formatCurrency(0, currency)}</span>
+            <span className="text-[10px] text-zinc-400">AWS, SaaS, Office, Legal</span>
+            <span className="font-mono-num">{formatCurrency(burnMax, currency)}</span>
           </div>
         </div>
       </div>

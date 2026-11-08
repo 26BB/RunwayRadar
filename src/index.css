@@ -1,28 +1,40 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: custom · job: try · idea: "founder runway and headcount war room cockpit" · vibe: "obsidian telemetry, hairline precision, tabular figures" · hero: bento vital signs with interactive crossover curve · nav: command bar · footer: executive audit metadata · imagery: none · signature: interactive breakeven crossover curve and live headcount drag simulation
+ * axes: slate/hairline/emerald · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 · weakest: V, standard bento layouts; strengthened with Stitch obsidian telemetry, chiseled hairlines, and zero-slop craft */
+
 @import "tailwindcss";
+@import "./tokens.css";
+
+@theme {
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-surface-1: var(--card-surface);
+  --color-surface-2: var(--card-surface-recessed);
+  --color-card-hover: var(--card-hover);
+  --color-hairline: var(--border-hairline);
+  --color-hairline-hover: var(--border-hairline-hover);
+  --color-primary-emerald: var(--primary-emerald);
+  --color-cliff-rose: var(--cliff-rose);
+  --color-warn-amber: var(--warn-amber);
+  --color-radar-cyan: var(--radar-cyan);
+  --color-text-high: var(--text-high);
+  --color-text-med: var(--text-med);
+  --color-text-muted: var(--text-muted);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
 
 @layer base {
-  :root {
-    --canvas: #08090C;
-    --card-surface: #0D0F15;
-    --card-hover: #12151E;
-    --border-subtle: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
-    --border-highlight: rgba(255, 255, 255, 0.20);
-    
-    --alive-emerald: #10B981;
-    --dead-rose: #F43F5E;
-    --warn-amber: #F59E0B;
-    --radar-cyan: #06B6D4;
-    --brand-indigo: #6366F1;
+  html, body {
+    overflow-x: clip;
   }
 
   body {
-    background-color: #08090C;
-    color: #F8FAFC;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--canvas);
+    color: var(--text-high);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
   }
 
   /* Custom Sleek Scrollbar */
@@ -31,14 +43,36 @@
     height: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #08090C;
+    background: var(--canvas);
   }
   ::-webkit-scrollbar-thumb {
-    background: #1E2333;
-    border-radius: 9999px;
+    background: var(--border-hairline);
+    border-radius: var(--radius-pill);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: var(--border-hairline-hover);
+  }
+
+  /* Accessible Focus Ring */
+  :focus-visible {
+    outline: 1px solid var(--primary-emerald);
+    outline-offset: 1px;
+  }
+
+  /* Disabled State */
+  :disabled, [aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -46,15 +80,15 @@
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: #171A24;
-  border-radius: 9999px;
+  background: var(--card-surface-recessed);
+  border-radius: var(--radius-pill);
   height: 5px;
   outline: none;
-  transition: background 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
 input[type="range"]:hover {
-  background: #1F2433;
+  background: var(--card-hover);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -63,16 +97,15 @@ input[type="range"]::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--thumb-tint);
   cursor: pointer;
-  border: 2px solid #08090C;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 2px solid var(--canvas);
+  box-shadow: 0 1px 3px var(--shadow-thumb-color);
+  transition: transform 0.15s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.18);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.4);
+  transform: scale(1.15);
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
@@ -83,35 +116,34 @@ input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--thumb-tint);
   cursor: pointer;
-  border: 2px solid #08090C;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--canvas);
 }
 
 /* High-Precision Monospace Tabular Figures */
 .font-mono-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: -0.02em;
 }
 
-/* Subtle Glassmorphic Panel */
+/* Subtle Institutional Panel */
 .fintech-card {
-  background-color: #0D0F15;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--card-surface);
+  color: var(--text-high);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+  transition: border-color 0.15s ease;
 }
 
 .fintech-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-hairline-hover);
 }
 
-/* Ambient Radial Glow */
+/* Ambient Radial Illuminations */
 .canvas-ambient-glow {
   background-image: 
-    radial-gradient(ellipse 90% 40% at 50% -15%, rgba(99, 102, 241, 0.05), transparent 70%),
-    radial-gradient(ellipse 60% 30% at 100% 0%, rgba(16, 185, 129, 0.03), transparent 60%);
+    radial-gradient(ellipse 70% 30% at 50% -10%, var(--glow-slate), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 100% 0%, var(--glow-emerald), transparent 60%);
 }

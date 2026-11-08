@@ -62,17 +62,17 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
   );
 
   return (
-    <div className="bg-[#0D0F15] border border-white/[0.06] rounded-xl p-5 shadow-sm">
+    <div className="bg-[var(--card-surface)] border border-white/[0.06] rounded-xl p-5 shadow-sm">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3.5 border-b border-white/[0.06] mb-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
-              <Users className="w-4 h-4 text-zinc-400" /> Headcount Sandbox ("What-If" Hiring)
+              <Users className="w-4 h-4 text-zinc-400" /> Headcount sandbox (what-if hiring)
             </h2>
-            <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
-              {hires.length} {hires.length === 1 ? 'Role' : 'Roles'}
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
+              <span className="font-mono-num">{hires.length}</span> {hires.length === 1 ? 'role' : 'roles'}
             </span>
           </div>
           <p className="text-[11px] text-zinc-400 mt-0.5">
@@ -82,16 +82,16 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
 
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {runwayDrag > 0 && (
-            <div className="px-2.5 py-1 rounded-md bg-rose-500/[0.08] border border-rose-500/20 text-rose-400 text-xs font-mono font-bold">
-              -{runwayDrag.toFixed(1)} mos Drag
+            <div className="px-2.5 py-1 rounded-md bg-rose-500/[0.08] border border-rose-500/20 text-rose-400 text-xs font-medium">
+              -<span className="font-mono-num">{runwayDrag.toFixed(1)}</span> mos drag
             </div>
           )}
           <button
             onClick={() => setIsFormOpen(!isFormOpen)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-all active:scale-[0.98]"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>Add Planned Role</span>
+            <span>Add planned role</span>
           </button>
         </div>
       </div>
@@ -100,13 +100,13 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
       {isFormOpen && (
         <form onSubmit={handleCreate} className="bg-zinc-900/60 border border-white/[0.1] rounded-xl p-4 mb-4 shadow-inner">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-white tracking-wide flex items-center gap-1.5 font-mono uppercase">
-              <Briefcase className="w-3.5 h-3.5 text-zinc-400" /> New Role Configuration
+            <span className="text-xs font-semibold text-white tracking-wide flex items-center gap-1.5">
+              <Briefcase className="w-3.5 h-3.5 text-zinc-400" /> New role configuration
             </span>
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="text-xs text-zinc-400 hover:text-white"
+              className="text-xs text-zinc-400 hover:text-white transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -114,14 +114,14 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Role Title</label>
+              <label className="block text-xs text-zinc-400 mb-1 font-medium">Role title</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. Founding AI Engineer"
                 value={roleTitle}
                 onChange={(e) => setRoleTitle(e.target.value)}
-                className="w-full px-3 py-1.5 bg-[#08090C] border border-white/[0.08] rounded-lg text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/20"
+                className="w-full px-3 py-1.5 bg-[var(--canvas)] border border-white/[0.08] rounded-lg text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 focus-visible:ring-1 focus-visible:ring-emerald-400"
               />
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {COMMON_ROLES.slice(0, 3).map((cr) => (
@@ -129,7 +129,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                     key={cr}
                     type="button"
                     onClick={() => setRoleTitle(cr)}
-                    className="text-[10px] text-zinc-400 hover:text-white bg-zinc-800/80 px-1.5 py-0.5 rounded border border-white/[0.04]"
+                    className="text-[11px] text-zinc-400 hover:text-white bg-zinc-800/80 px-1.5 py-0.5 rounded border border-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     +{cr.split(' ')[0]}
                   </button>
@@ -138,8 +138,8 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">
-                Monthly Salary ({currency})
+              <label className="block text-xs text-zinc-400 mb-1 font-medium">
+                Monthly salary ({currency})
               </label>
               <input
                 type="number"
@@ -148,16 +148,16 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                 required
                 value={salary}
                 onChange={(e) => setSalary(Number(e.target.value))}
-                className="w-full px-3 py-1.5 bg-[#08090C] border border-white/[0.08] rounded-lg text-xs text-white font-mono focus:outline-none focus:border-white/20"
+                className="w-full px-3 py-1.5 bg-[var(--canvas)] border border-white/[0.08] rounded-lg text-xs text-white font-mono-num focus:outline-none focus:border-white/20 focus-visible:ring-1 focus-visible:ring-emerald-400"
               />
-              <span className="text-[10px] text-zinc-400 block mt-1 font-mono">
-                Base: {formatCurrency(salary, currency)}/mo
+              <span className="text-[11px] text-zinc-400 block mt-1">
+                Base: <span className="font-mono-num">{formatCurrency(salary, currency)}</span>/mo
               </span>
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-1">
-                Start Month: <span className="text-white font-mono font-bold">Month +{startMonth}</span>
+              <label className="block text-xs text-zinc-400 mb-1 font-medium">
+                Start month: <span className="text-white font-bold">Month +<span className="font-mono-num">{startMonth}</span></span>
               </label>
               <input
                 type="range"
@@ -168,7 +168,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                 onChange={(e) => setStartMonth(Number(e.target.value))}
                 className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer mt-2"
               />
-              <div className="flex justify-between text-[10px] text-zinc-400 mt-1 font-mono">
+              <div className="flex justify-between text-[11px] text-zinc-400 mt-1">
                 <span>Immediate (M0)</span>
                 <span>M6 (+180d)</span>
                 <span>M12</span>
@@ -186,15 +186,15 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
               />
               <span className="flex items-center gap-1.5 font-medium">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span>Apply 1.25x Fully Loaded Multiplier (taxes, equipment, SaaS, insurance)</span>
+                <span>Apply 1.25x fully loaded multiplier (taxes, equipment, SaaS, insurance)</span>
               </span>
             </label>
 
             <button
               type="submit"
-              className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-sm transition-colors"
+              className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-sm transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Confirm Role
+              Confirm role
             </button>
           </div>
         </form>
@@ -206,7 +206,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
           <Users className="w-7 h-7 text-zinc-600 mx-auto mb-2" />
           <p className="text-xs font-medium text-zinc-300">No planned headcount modeled yet.</p>
           <p className="text-[11px] text-zinc-500 mt-0.5">
-            Click "Add Planned Role" above or load the Seed preset to simulate hiring impact.
+            Click &lsquo;Add planned role&rsquo; above or load the Seed preset to simulate hiring impact.
           </p>
         </div>
       ) : (
@@ -216,7 +216,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
             return (
               <div
                 key={hire.id}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg bg-zinc-900/50 border border-white/[0.06] hover:border-white/[0.12] transition-colors"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg bg-zinc-900/50 border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-150"
               >
                 <div className="flex items-start sm:items-center gap-3">
                   <div className="w-7 h-7 rounded-md bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-zinc-300 shrink-0">
@@ -225,15 +225,15 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-xs text-white">{hire.role}</span>
-                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
-                        Starts M+{hire.startMonthOffset}
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
+                        Starts M+<span className="font-mono-num">{hire.startMonthOffset}</span>
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-[11px] text-zinc-400 mt-0.5 font-mono">
-                      <span>Base: {formatCurrency(hire.salaryMonthly, currency)}/mo</span>
-                      <span>·</span>
+                    <div className="flex items-center gap-2 text-[11px] text-zinc-400 mt-0.5">
+                      <span>Base: <span className="font-mono-num">{formatCurrency(hire.salaryMonthly, currency)}</span>/mo</span>
+                      <span>|</span>
                       <span className="text-emerald-400 font-medium">
-                        Loaded: {formatCurrency(loadedCost, currency)}/mo
+                        Loaded: <span className="font-mono-num">{formatCurrency(loadedCost, currency)}</span>/mo
                       </span>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
                 <div className="flex items-center gap-2.5 self-end sm:self-center">
                   <button
                     onClick={() => onUpdateHire(hire.id, { isFullyLoaded: !hire.isFullyLoaded })}
-                    className={`flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono rounded border transition-colors ${
+                    className={`flex items-center gap-1.5 px-2 py-1 text-[11px] rounded border transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
                       hire.isFullyLoaded
                         ? 'bg-amber-500/[0.08] text-amber-300 border-amber-500/20'
                         : 'bg-zinc-800 text-zinc-400 border-white/[0.06] hover:text-white'
@@ -255,7 +255,7 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
 
                   <button
                     onClick={() => onRemoveHire(hire.id)}
-                    className="p-1.5 text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors"
+                    className="p-1.5 text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Remove role from scenario"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -272,10 +272,10 @@ export const HeadcountSandbox: React.FC<HeadcountSandboxProps> = ({
         <div className="mt-3.5 pt-3 border-t border-white/[0.04] flex flex-col sm:flex-row items-start sm:items-center justify-between text-[11px] text-zinc-400 gap-2">
           <div className="flex items-center gap-1.5">
             <Info className="w-3.5 h-3.5 text-zinc-500" />
-            <span>1.25x load factors in payroll taxes, healthcare, MacBook, and SaaS seats.</span>
+            <span>1.25x load factors in payroll taxes, healthcare, workstation, and SaaS seats.</span>
           </div>
-          <div className="font-mono text-zinc-300">
-            Total Headcount Outflow: <span className="font-bold text-white">{formatCurrency(totalLoadedMonthly, currency)}/mo</span>
+          <div className="text-zinc-300">
+            Total headcount outflow: <span className="font-bold text-white font-mono-num">{formatCurrency(totalLoadedMonthly, currency)}/mo</span>
           </div>
         </div>
       )}

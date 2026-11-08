@@ -95,7 +95,7 @@ export const App: React.FC = () => {
     if (preset) {
       setActivePresetId(presetId);
       setFinancialState(preset.state);
-      showToast(`Loaded "${preset.name}" scenario`);
+      showToast(`Loaded scenario: ${preset.name}`);
     }
   }, []);
 
@@ -128,7 +128,7 @@ export const App: React.FC = () => {
   const handleNuclearToggle = useCallback((active: boolean) => {
     setActivePresetId(null);
     setFinancialState((prev) => ({ ...prev, isNuclearWinter: active }));
-    showToast(active ? 'Macro Stress-Test Mode Activated' : 'Standard Market Baseline Restored');
+    showToast(active ? 'Macro stress-test mode activated' : 'Standard market baseline restored');
   }, []);
 
   const showToast = (msg: string) => {
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#08090C] text-[#F8FAFC] flex flex-col font-sans selection:bg-white/[0.1] canvas-ambient-glow">
+    <div className="min-h-screen bg-[var(--canvas)] text-[var(--text-high)] flex flex-col font-sans selection:bg-white/[0.1] canvas-ambient-glow">
       {/* Top Navigation */}
       <Header
         currency={financialState.currency}
@@ -196,7 +196,7 @@ export const App: React.FC = () => {
 
       {/* Feedback Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-5 right-5 z-50 bg-zinc-900/95 border border-white/[0.12] text-zinc-100 px-3.5 py-2 rounded-lg shadow-2xl text-xs font-medium flex items-center gap-2 backdrop-blur-md">
+        <div className="fixed bottom-5 right-5 z-50 bg-zinc-900 border border-white/[0.12] text-zinc-100 px-3.5 py-2 rounded-lg shadow-lg text-xs font-medium flex items-center gap-2">
           <Check className="w-3.5 h-3.5 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
@@ -212,23 +212,23 @@ export const App: React.FC = () => {
       />
 
       {/* Executive Minimalist Footer */}
-      <footer className="border-t border-white/[0.04] py-5 px-4 lg:px-8 bg-[#06070A] text-xs text-zinc-400">
+      <footer className="border-t border-white/[0.04] py-5 px-4 lg:px-8 bg-[var(--canvas-deep)] text-xs text-zinc-400">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-[11px]">
+          <div className="flex flex-wrap items-center gap-2.5 text-[11px]">
             <span className="font-semibold text-zinc-300">RunwayRadar</span>
-            <span>·</span>
-            <span>Founder Runway & Headcount Simulator</span>
-            <span>·</span>
+            <span className="text-zinc-600">|</span>
+            <span>Founder runway & headcount simulator</span>
+            <span className="text-zinc-600">|</span>
             <button
               onClick={handleReset}
-              className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors font-mono"
+              className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <RotateCcw className="w-3 h-3" /> Reset
             </button>
           </div>
-          <div className="flex items-center gap-3 text-[11px] font-mono">
-            <span>Deterministic Client-Side Math</span>
-            <span>·</span>
+          <div className="flex items-center gap-2.5 text-[11px] text-zinc-400">
+            <span>Deterministic client-side math</span>
+            <span className="text-zinc-600">|</span>
             <span className="text-zinc-300">Crafted by Bhushan Bhosale</span>
           </div>
         </div>

@@ -54,24 +54,24 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85">
       <div
-        className="bg-[#0D0F15] border border-white/[0.08] rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="bg-[var(--card-surface)] border border-white/[0.08] rounded-xl max-w-2xl w-full shadow-lg overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
           <div>
             <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
-              <FileText className="w-4 h-4 text-zinc-400" /> Executive & Investor Memo Export
+              <FileText className="w-4 h-4 text-zinc-400" /> Executive and investor memo export
             </h3>
             <p className="text-[11px] text-zinc-400 mt-0.5">
-              Instant standardized updates for Notion, WhatsApp, Slack, or Board Communications
+              Instant standardized updates for Notion, WhatsApp, Slack, or board communications
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors"
+            className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <X className="w-4 h-4" />
           </button>
@@ -86,14 +86,14 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Company Name"
-              className="px-2.5 py-1 text-xs bg-zinc-900 border border-white/[0.08] rounded-md text-white font-medium focus:outline-none focus:border-white/20 w-full sm:w-48"
+              className="px-2.5 py-1 text-xs bg-zinc-900 border border-white/[0.08] rounded-md text-white font-medium focus:outline-none focus:border-white/20 focus-visible:ring-1 focus-visible:ring-emerald-400 w-full sm:w-48"
             />
           </div>
 
           <div className="flex items-center gap-1 bg-zinc-900 p-0.5 rounded-lg border border-white/[0.08]">
             <button
               onClick={() => setActiveTab('markdown')}
-              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
                 activeTab === 'markdown'
                   ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.08]'
                   : 'text-zinc-400 hover:text-white'
@@ -104,7 +104,7 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('whatsapp')}
-              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed ${
                 activeTab === 'whatsapp'
                   ? 'bg-zinc-800 text-white shadow-xs border border-white/[0.08]'
                   : 'text-zinc-400 hover:text-white'
@@ -117,35 +117,35 @@ export const InvestorMemoModal: React.FC<InvestorMemoModalProps> = ({
         </div>
 
         {/* Formatted Code View */}
-        <div className="p-5 overflow-y-auto font-mono text-xs bg-[#08090C] text-zinc-300 flex-1 leading-relaxed whitespace-pre-wrap select-all">
+        <div className="p-5 overflow-y-auto font-mono text-xs bg-[var(--canvas)] text-zinc-300 flex-1 leading-relaxed whitespace-pre-wrap select-all">
           {activeContent}
         </div>
 
         {/* Footer Actions */}
         <div className="flex items-center justify-between px-5 py-3.5 bg-zinc-900/60 border-t border-white/[0.06]">
-          <span className="text-[11px] text-zinc-400 font-mono">
-            {activeTab === 'markdown' ? 'Notion & Slack Markdown ready' : 'WhatsApp single-click bolding'}
+          <span className="text-[11px] text-zinc-400">
+            {activeTab === 'markdown' ? 'Notion and Slack Markdown ready' : 'WhatsApp single-click bolding'}
           </span>
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="px-3 py-1.5 text-xs text-zinc-400 hover:text-white"
+              className="px-3 py-1.5 text-xs text-zinc-400 hover:text-white transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-all active:scale-[0.98]"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm transition-colors duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
               {copied ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-emerald-700 font-medium">Copied!</span>
+                  <span className="text-emerald-700 font-medium">Copied</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5" />
-                  <span>Copy to Clipboard</span>
+                  <span>Copy</span>
                 </>
               )}
             </button>
